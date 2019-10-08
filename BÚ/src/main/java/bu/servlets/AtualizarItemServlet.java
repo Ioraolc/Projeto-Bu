@@ -42,7 +42,7 @@ public class AtualizarItemServlet extends HttpServlet {
 			resp.getWriter().write(itemJson);
 		} else {
 			Erro erro = new Erro();
-			erro.setMensagem("NÃ£o existe um item com a mesma descriÃ§Ã£o!");
+			erro.setMensagem("Não existe um item com a mesma descrição!");
 			String erroJson = new Gson().toJson(erro);
 			resp.getWriter().write(erroJson);
 		}

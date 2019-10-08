@@ -40,7 +40,7 @@ public class DemostrarInteresseServlet extends HttpServlet {
 			resp.getWriter().write(itemJson);
 		} else {
 			Erro erro = new Erro();
-			erro.setMensagem("NÃ£o foi possÃ­vel cadastrar o interesse!");
+			erro.setMensagem("Não foi possível cadastrar o interesse!");
 			String erroJson = new Gson().toJson(erro);
 			resp.getWriter().write(erroJson);
 		}

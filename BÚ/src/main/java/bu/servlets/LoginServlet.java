@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 			resp.getWriter().write(usuarioJson);
 		} else {
 			Erro erro = new Erro();
-			erro.setMensagem("Email e senha n√£o conferem.");
+			erro.setMensagem("Email e senha n„o conferem.");
 			
 			String erroJson = new Gson().toJson(erro);
 			resp.getWriter().write(erroJson);
