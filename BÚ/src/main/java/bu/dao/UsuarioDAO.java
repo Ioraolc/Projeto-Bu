@@ -14,16 +14,21 @@ import com.google.appengine.api.datastore.Query.FilterPredicate;
 import bu.modelo.Usuario;
 
 public class UsuarioDAO {
-
-	public boolean cadastrar(Usuario usuario) {
-		
-		if (!this.existeUsuario(usuario.getEmail())) {
+	public boolean Cadastrar(Usuario usuario) {
+		if (!this.ExisteUsuario(usuario.getEmail())) {
 			Key chavePrimaria = KeyFactory.createKey("Usuario", usuario.getEmail()); 
 			
 			Entity entidadeUsuario = new Entity(chavePrimaria);
 			entidadeUsuario.setProperty("nome", usuario.getNome());
 			entidadeUsuario.setProperty("email", usuario.getEmail());
-			entidadeUsuario.setProperty("senha", usuario.getSenha());
+			entidadeUsuario.setProperty("cidade", usuario.getCidade());
+			entidadeUsuario.setProperty("estado", usuario.getEstado());
+			entidadeUsuario.setProperty("pais", usuario.getPais());
+			entidadeUsuario.setProperty("cd_postal", usuario.getCd_postal());
+			entidadeUsuario.setProperty("senha",usuario.getSenha());
+			entidadeUsuario.setProperty("num_telefone", usuario.getNum_telefone());
+			entidadeUsuario.setProperty("form_escolar", usuario.getForm_escolar());
+			entidadeUsuario.setProperty("exp_trabalho", usuario.getExp_trabalho());
 			
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			datastore.put(entidadeUsuario);
@@ -32,11 +37,14 @@ public class UsuarioDAO {
 		}
 		
 		return false;
+			
 	}
-	
+	private boolean ExisteUsuario(String email) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	public boolean existeUsuario(String email) {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-		
 		Query query = new Query("Usuario");
 		Filter filtro = new FilterPredicate("email", FilterOperator.EQUAL, email);
 		query.setFilter(filtro);
@@ -45,8 +53,9 @@ public class UsuarioDAO {
 		if (pq.asSingleEntity() == null) {
 			return false;
 		}
-		
 		return true;
+		
 	}
-	
+		
 }
+

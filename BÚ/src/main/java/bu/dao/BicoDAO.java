@@ -15,17 +15,17 @@ import com.google.appengine.api.datastore.Query.Filter;
 import com.google.appengine.api.datastore.Query.FilterOperator;
 import com.google.appengine.api.datastore.Query.FilterPredicate;
 
-import bu.modelo.Item;
+import bu.modelo.Bico;
 import bu.modelo.Usuario;
 
-public class ItemDAO {
+public class BicoDAO {
 
-	public List<Item> listarItens(){
-		List<Item> itens = new ArrayList<Item>();
+	public List<Bico> listarItens(){
+		List<Bico> itens = new ArrayList<Bico>();
 		
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		
-		Query query = new Query("Item");
+		Query query = new Query("Bico");
 		Filter filtro = new FilterPredicate("disponivel", FilterOperator.EQUAL, true);
 		query.setFilter(filtro);
 		
@@ -33,31 +33,31 @@ public class ItemDAO {
 		
 		List<Entity> entidades = pq.asList(FetchOptions.Builder.withLimit(1000));
 		for (Entity entidade : entidades) {
-			Item item = new Item();
-			item.setDescricao((String)entidade.getProperty("descricao"));
-			item.setDetalhes((String)entidade.getProperty("detalhes"));
-			item.setDisponivel((Boolean)entidade.getProperty("disponivel"));
+			Bico bico = new Bico();
+			bico.setDescricao((String)entidade.getProperty("descricao"));
+			bico.setDetalhes((String)entidade.getProperty("detalhes"));
+			bico.setDisponivel((Boolean)entidade.getProperty("disponivel"));
 			
 			Usuario doador = new Usuario();
 			doador.setEmail((String)entidade.getProperty("doador"));
-			item.setDoador(doador);
+			bico.setDoador(doador);
 			
-			itens.add(item);
+			itens.add(bico);
 		}
 		
 		return itens;
 	}
 	
-	public boolean cadastrar(Item item) {
+	public boolean cadastrar(Bico bico) {
 		
-		if (!this.existeItemCadastrado(item.getDescricao())) {
-			Key chavePrimaria = KeyFactory.createKey("Item", item.getDescricao()); 
+		if (!this.existeItemCadastrado(bico.getDescricao())) {
+			Key chavePrimaria = KeyFactory.createKey("Bico", bico.getDescricao()); 
 			
 			Entity entidadeItem = new Entity(chavePrimaria);
-			entidadeItem.setProperty("descricao", item.getDescricao());
-			entidadeItem.setProperty("detalhes", item.getDetalhes());
-			entidadeItem.setProperty("disponivel", item.getDisponivel());
-			entidadeItem.setProperty("doador", item.getDoador().getEmail());
+			entidadeItem.setProperty("descricao", bico.getDescricao());
+			entidadeItem.setProperty("detalhes", bico.getDetalhes());
+			entidadeItem.setProperty("disponivel", bico.getDisponivel());
+			entidadeItem.setProperty("doador", bico.getDoador().getEmail());
 			
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			datastore.put(entidadeItem);
@@ -68,16 +68,16 @@ public class ItemDAO {
 		return false;
 	}
 	
-	public boolean atualizar(Item item) {
+	public boolean atualizar(Bico bico) {
 		
-		Entity itemDB = this.getItem(item.getDescricao());
+		Entity itemDB = this.getItem(bico.getDescricao());
 		
 		if (itemDB != null) {
 			
-			itemDB.setProperty("descricao", item.getDescricao());
-			itemDB.setProperty("detalhes", item.getDetalhes());
-			itemDB.setProperty("disponivel", item.getDisponivel());
-			itemDB.setProperty("doador", item.getDoador().getEmail());
+			itemDB.setProperty("descricao", bico.getDescricao());
+			itemDB.setProperty("detalhes", bico.getDetalhes());
+			itemDB.setProperty("disponivel", bico.getDisponivel());
+			itemDB.setProperty("doador", bico.getDoador().getEmail());
 			
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			datastore.put(itemDB);
@@ -91,7 +91,7 @@ public class ItemDAO {
 	public Entity getItem(String descricao) {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		
-		Query query = new Query("Item");
+		Query query = new Query("Bico");
 		Filter filtro = new FilterPredicate("descricao", FilterOperator.EQUAL, descricao);
 		query.setFilter(filtro);
 		
@@ -109,7 +109,7 @@ public class ItemDAO {
 	public boolean existeItemCadastrado(String descricao) {
 		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 		
-		Query query = new Query("Item");
+		Query query = new Query("Bico");
 		Filter filtro = new FilterPredicate("descricao", FilterOperator.EQUAL, descricao);
 		query.setFilter(filtro);
 		

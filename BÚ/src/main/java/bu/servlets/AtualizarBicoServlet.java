@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import bu.dao.ItemDAO;
-import bu.modelo.Item;
+import bu.dao.BicoDAO;
+import bu.modelo.Bico;
 import bu.util.Erro;
 
-@WebServlet(name = "AtualizarItemServlet", urlPatterns = { "/atualizarItem" })
-public class AtualizarItemServlet extends HttpServlet {
+@WebServlet(name = "AtualizarBicoServlet", urlPatterns = { "/atualizarItem" })
+public class AtualizarBicoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,12 +33,12 @@ public class AtualizarItemServlet extends HttpServlet {
 			parametro.append(line.trim());
 		
 		
-		Item item = new Gson().fromJson(parametro.toString(), Item.class);
+		Bico bico = new Gson().fromJson(parametro.toString(), Bico.class);
 		
-		boolean atualizacaoRealizada = new ItemDAO().atualizar(item);
+		boolean atualizacaoRealizada = new BicoDAO().atualizar(bico);
 		
 		if (atualizacaoRealizada) {
-			String itemJson = new Gson().toJson(item);
+			String itemJson = new Gson().toJson(bico);
 			resp.getWriter().write(itemJson);
 		} else {
 			Erro erro = new Erro();

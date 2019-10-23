@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.appengine.repackaged.com.google.gson.Gson;
 
-import bu.dao.ItemDAO;
-import bu.modelo.Item;
+import bu.dao.BicoDAO;
+import bu.modelo.Bico;
 
 @WebServlet(name = "ListarItensServlet", urlPatterns = { "/listarItens" })
 public class ListarItensServlet extends HttpServlet {
@@ -24,7 +24,7 @@ public class ListarItensServlet extends HttpServlet {
 		
 		resp.setContentType("application/json;charset=UTF-8");
 		
-		List<Item> itens = new ItemDAO().listarItens();
+		List<Bico> itens = new BicoDAO().listarItens();
 		
 		String itensJson = new Gson().toJson(itens);
 		

@@ -1,6 +1,6 @@
 package bu.modelo;
 
-public class Item {
+public class Bico {
 
 	private String descricao;
 	private String detalhes;

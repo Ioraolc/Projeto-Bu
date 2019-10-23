@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
-import bu.dao.ItemDAO;
-import bu.modelo.Item;
+import bu.dao.BicoDAO;
+import bu.modelo.Bico;
 import bu.util.Erro;
 
-@WebServlet(name = "CadastroItemServlet", urlPatterns = { "/cadastroItem" })
-public class CadastroItemServlet extends HttpServlet {
+@WebServlet(name = "CadastroBicoServlet", urlPatterns = { "/cadastroItem" })
+public class CadastroBicoServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,12 +33,12 @@ public class CadastroItemServlet extends HttpServlet {
 			parametro.append(line.trim());
 		
 		
-		Item item = new Gson().fromJson(parametro.toString(), Item.class);
+		Bico bico = new Gson().fromJson(parametro.toString(), Bico.class);
 		
-		boolean cadastroRealizado = new ItemDAO().cadastrar(item);
+		boolean cadastroRealizado = new BicoDAO().cadastrar(bico);
 		
 		if (cadastroRealizado) {
-			String itemJson = new Gson().toJson(item);
+			String itemJson = new Gson().toJson(bico);
 			resp.getWriter().write(itemJson);
 		} else {
 			Erro erro = new Erro();

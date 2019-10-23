@@ -1,6 +1,6 @@
 package bu.servlets;
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -9,44 +9,58 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 
-import bu.dao.UsuarioDAO;
 import bu.modelo.Usuario;
-import bu.util.Erro;
+import bu.dao.UsuarioDAO;
 
 @WebServlet(name = "CadastroUsuarioServlet", urlPatterns = { "/cadastroUsuario" })
-public class CadastroUsuarioServlet extends HttpServlet {
-
+public class CadastroUsuarioServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
-
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//resp.setContentType("application/json;charset=UTF-8");
 		
-		resp.setContentType("application/json;charset=UTF-8");
+		//StringBuffer parametro = new StringBuffer();
+		//String line = null;
 		
-		StringBuffer parametro = new StringBuffer();
-		String line = null;
+		//BufferedReader reader = req.getReader();
+		//while ((line = reader.readLine()) != null)
+			//parametro.append(line.trim());
 		
-		BufferedReader reader = req.getReader();
-		while ((line = reader.readLine()) != null)
-			parametro.append(line.trim());
+		Usuario usuario = new Usuario();
+		String nome = req.getParameter("nome");
+		usuario.setNome(nome);
 		
+		String email = req.getParameter("email");
+		usuario.setEmail(email);
 		
-		Usuario usuario = new Gson().fromJson(parametro.toString(), Usuario.class);
+		String cidade = req.getParameter("cidade");
+		usuario.setCidade(cidade);
 		
-		boolean cadastroRealizado = new UsuarioDAO().cadastrar(usuario);
+		String estado = req.getParameter("estado");
+		usuario.setEstado(estado);
 		
-		if (cadastroRealizado) {
-			String usuarioJson = new Gson().toJson(usuario);
-			resp.getWriter().write(usuarioJson);
-		} else {
-			Erro erro = new Erro();
-			erro.setMensagem("Já existe um usuario com o email informado!");
-			String erroJson = new Gson().toJson(erro);
-			resp.getWriter().write(erroJson);
-		}
+		String pais = req.getParameter("pais");
+		usuario.setPais(pais);
+		
+		String cd_postal = req.getParameter("cd_postal");
+		usuario.setCd_postal(cd_postal);
+		
+		String senha = req.getParameter("senha");
+		usuario.setSenha(senha);
+		
+		String num_telefone = req.getParameter("num_telefone");
+		usuario.setNum_telefone(num_telefone);
+		
+		String form_escolar = req.getParameter("form_escolar");
+		usuario.setNum_telefone(form_escolar);
+		
+		String exp_trabalho = req.getParameter("exp_trabalho");
+		usuario.setNum_telefone(exp_trabalho);
+		
+		boolean cadastroRealizado = new UsuarioDAO().Cadastrar(usuario);
+		
+		//Falta mensagem
 		
 	}
-	
 }

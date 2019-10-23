@@ -3,7 +3,7 @@ package bu.modelo;
 public class Interesse {
 
 	private Usuario interessado;
-	private Item item;
+	private Bico bico;
 
 	public Usuario getInteressado() {
 		return interessado;
@@ -13,12 +13,12 @@ public class Interesse {
 		this.interessado = interessado;
 	}
 
-	public Item getItem() {
-		return item;
+	public Bico getItem() {
+		return bico;
 	}
 
-	public void setItem(Item item) {
-		this.item = item;
+	public void setItem(Bico bico) {
+		this.bico = bico;
 	}
 
 }
