@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 account.email=afonsoomenafarias@gmail.com
 eclipse.preferences.version=1
 include.optional.configuration.files=true
@@ -7,3 +8,14 @@ project.id=my-chance-test-249117
 project.previousVersion.stop=true
 project.promote=true
 project.version=
+=======
+account.email=afonsoomenafarias@gmail.com
+eclipse.preferences.version=1
+include.optional.configuration.files=true
+project.allowObsoleteRuntime=false
+project.bucket=
+project.id=my-chance-test-249117
+project.previousVersion.stop=true
+project.promote=true
+project.version=
+>>>>>>> branch 'master' of http://github.com/Ioraolc/Projeto-Bu.git

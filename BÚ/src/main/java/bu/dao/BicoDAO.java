@@ -34,6 +34,7 @@ public class BicoDAO {
 		List<Entity> entidades = pq.asList(FetchOptions.Builder.withLimit(1000));
 		for (Entity entidade : entidades) {
 			Bico bico = new Bico();
+<<<<<<< HEAD
 			bico.setTipo((String)entidade.getProperty("tipoo"));
 			bico.setDetalhes((String)entidade.getProperty("detalhes"));
 			bico.setDisponivel((Boolean)entidade.getProperty("disponivel"));
@@ -82,6 +83,52 @@ public class BicoDAO {
 			itemDB.setProperty("Locazicao", bico.getLocalizacao());
 			itemDB.setProperty("disponivel", bico.getDisponivel());
 			itemDB.setProperty("contratante", bico.getContratante().getEmail());
+=======
+			bico.setDescricao((String)entidade.getProperty("descricao"));
+			bico.setDetalhes((String)entidade.getProperty("detalhes"));
+			bico.setDisponivel((Boolean)entidade.getProperty("disponivel"));
+			
+			Usuario doador = new Usuario();
+			doador.setEmail((String)entidade.getProperty("doador"));
+			bico.setDoador(doador);
+			
+			itens.add(bico);
+		}
+		
+		return itens;
+	}
+	
+	public boolean cadastrar(Bico bico) {
+		
+		if (!this.existeItemCadastrado(bico.getDescricao())) {
+			Key chavePrimaria = KeyFactory.createKey("Bico", bico.getDescricao()); 
+			
+			Entity entidadeItem = new Entity(chavePrimaria);
+			entidadeItem.setProperty("descricao", bico.getDescricao());
+			entidadeItem.setProperty("detalhes", bico.getDetalhes());
+			entidadeItem.setProperty("disponivel", bico.getDisponivel());
+			entidadeItem.setProperty("doador", bico.getDoador().getEmail());
+			
+			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+			datastore.put(entidadeItem);
+			
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean atualizar(Bico bico) {
+		
+		Entity itemDB = this.getItem(bico.getDescricao());
+		
+		if (itemDB != null) {
+			
+			itemDB.setProperty("descricao", bico.getDescricao());
+			itemDB.setProperty("detalhes", bico.getDetalhes());
+			itemDB.setProperty("disponivel", bico.getDisponivel());
+			itemDB.setProperty("doador", bico.getDoador().getEmail());
+>>>>>>> branch 'master' of http://github.com/Ioraolc/Projeto-Bu.git
 			
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			datastore.put(itemDB);
