@@ -18,14 +18,6 @@ public class CadastroUsuarioServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//resp.setContentType("application/json;charset=UTF-8");
-		
-		//StringBuffer parametro = new StringBuffer();
-		//String line = null;
-		
-		//BufferedReader reader = req.getReader();
-		//while ((line = reader.readLine()) != null)
-			//parametro.append(line.trim());
 		
 		Usuario usuario = new Usuario();
 		String nome = req.getParameter("nome");
@@ -43,24 +35,19 @@ public class CadastroUsuarioServlet extends HttpServlet{
 		String pais = req.getParameter("pais");
 		usuario.setPais(pais);
 		
-		String cd_postal = req.getParameter("cd_postal");
-		usuario.setCd_postal(cd_postal);
 		
 		String senha = req.getParameter("senha");
 		usuario.setSenha(senha);
 		
-		String num_telefone = req.getParameter("num_telefone");
-		usuario.setNum_telefone(num_telefone);
+		String telefone = req.getParameter("telefone");
+		usuario.setTelefone(telefone);
 		
-		String form_escolar = req.getParameter("form_escolar");
-		usuario.setNum_telefone(form_escolar);
 		
-		String exp_trabalho = req.getParameter("exp_trabalho");
-		usuario.setNum_telefone(exp_trabalho);
+		String experiencia = req.getParameter("experiencia");
+		usuario.setExperiencia(experiencia);
 		
 		boolean cadastroRealizado = new UsuarioDAO().Cadastrar(usuario);
 		
-		//Falta mensagem
 		
 	}
 }

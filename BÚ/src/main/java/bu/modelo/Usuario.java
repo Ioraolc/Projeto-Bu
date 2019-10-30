@@ -7,11 +7,10 @@ package bu.modelo;
 		private String cidade;
 		private String estado;
 		private String pais;
-		private String cd_postal;
 		private String senha;
-		private String num_telefone;
-		private String form_escolar;
-		private String exp_trabalho;
+		private String telefone;
+		private String experiencia;
+		public int cont = 1;
 		
 		public Usuario() {
 			
@@ -57,14 +56,6 @@ package bu.modelo;
 			this.pais = pais;
 		}
 
-		public String getCd_postal() {
-			return cd_postal;
-		}
-
-		public void setCd_postal(String cd_postal) {
-			this.cd_postal = cd_postal;
-		}
-
 		public String getSenha() {
 			return senha;
 		}
@@ -73,30 +64,31 @@ package bu.modelo;
 			this.senha = senha;
 		}
 
-		public String getNum_telefone() {
-			return num_telefone;
+		public String getTelefone() {
+			return telefone;
 		}
 
-		public void setNum_telefone(String num_telefone) {
-			this.num_telefone = num_telefone;
+		public void setTelefone(String telefone) {
+			this.telefone = telefone;
 		}
 
-		public String getForm_escolar() {
-			return form_escolar;
-		}
-
-		public void setForm_escolar(String form_escolar) {
-			this.form_escolar = form_escolar;
-		}
 
 		public String getExp_trabalho() {
-			return exp_trabalho;
+			return experiencia;
 		}
 
-		public void setExp_trabalho(String exp_trabalho) {
-			this.exp_trabalho = exp_trabalho;
+		public void setExperiencia(String experiencia) {
+			this.experiencia = experiencia;
+			
 		}
-		
-		
+		public int getCont() {
+
+					return cont;
+		}
+
+		public void setCont(int cont) {
+			this.cont = cont;
+		}
+
 	}
 

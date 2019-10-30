@@ -24,11 +24,9 @@ public class UsuarioDAO {
 			entidadeUsuario.setProperty("cidade", usuario.getCidade());
 			entidadeUsuario.setProperty("estado", usuario.getEstado());
 			entidadeUsuario.setProperty("pais", usuario.getPais());
-			entidadeUsuario.setProperty("cd_postal", usuario.getCd_postal());
 			entidadeUsuario.setProperty("senha",usuario.getSenha());
-			entidadeUsuario.setProperty("num_telefone", usuario.getNum_telefone());
-			entidadeUsuario.setProperty("form_escolar", usuario.getForm_escolar());
-			entidadeUsuario.setProperty("exp_trabalho", usuario.getExp_trabalho());
+			entidadeUsuario.setProperty("telefone", usuario.getTelefone());
+			entidadeUsuario.setProperty("txperiencia", usuario.getExp_trabalho());
 			
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			datastore.put(entidadeUsuario);
@@ -40,7 +38,6 @@ public class UsuarioDAO {
 			
 	}
 	private boolean ExisteUsuario(String email) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 	public boolean existeUsuario(String email) {

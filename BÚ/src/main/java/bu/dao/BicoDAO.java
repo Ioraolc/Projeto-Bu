@@ -34,13 +34,15 @@ public class BicoDAO {
 		List<Entity> entidades = pq.asList(FetchOptions.Builder.withLimit(1000));
 		for (Entity entidade : entidades) {
 			Bico bico = new Bico();
-			bico.setDescricao((String)entidade.getProperty("descricao"));
+			bico.setTipo((String)entidade.getProperty("tipoo"));
 			bico.setDetalhes((String)entidade.getProperty("detalhes"));
 			bico.setDisponivel((Boolean)entidade.getProperty("disponivel"));
+			bico.setValor((Float)entidade.getProperty("valor"));
+			bico.setLocalizacao((String)entidade.getProperty("Localização"));
 			
-			Usuario doador = new Usuario();
-			doador.setEmail((String)entidade.getProperty("doador"));
-			bico.setDoador(doador);
+			Usuario contratante = new Usuario();
+			contratante.setEmail((String)entidade.getProperty("contratante"));
+			bico.setContratante(contratante);
 			
 			itens.add(bico);
 		}
@@ -50,14 +52,14 @@ public class BicoDAO {
 	
 	public boolean cadastrar(Bico bico) {
 		
-		if (!this.existeItemCadastrado(bico.getDescricao())) {
-			Key chavePrimaria = KeyFactory.createKey("Bico", bico.getDescricao()); 
+		if (!this.existeItemCadastrado(bico.getTipo())) {
+			Key chavePrimaria = KeyFactory.createKey("Bico", bico.getTipo()); 
 			
 			Entity entidadeItem = new Entity(chavePrimaria);
-			entidadeItem.setProperty("descricao", bico.getDescricao());
+			entidadeItem.setProperty("descricao", bico.getTipo());
 			entidadeItem.setProperty("detalhes", bico.getDetalhes());
 			entidadeItem.setProperty("disponivel", bico.getDisponivel());
-			entidadeItem.setProperty("doador", bico.getDoador().getEmail());
+			entidadeItem.setProperty("doador", bico.getContratante().getEmail());
 			
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			datastore.put(entidadeItem);
@@ -70,14 +72,16 @@ public class BicoDAO {
 	
 	public boolean atualizar(Bico bico) {
 		
-		Entity itemDB = this.getItem(bico.getDescricao());
+		Entity itemDB = this.getItem(bico.getTipo());
 		
 		if (itemDB != null) {
 			
-			itemDB.setProperty("descricao", bico.getDescricao());
+			itemDB.setProperty("Tipo", bico.getTipo());
 			itemDB.setProperty("detalhes", bico.getDetalhes());
+			itemDB.setProperty("valor", bico.getValor());
+			itemDB.setProperty("Locazicao", bico.getLocalizacao());
 			itemDB.setProperty("disponivel", bico.getDisponivel());
-			itemDB.setProperty("doador", bico.getDoador().getEmail());
+			itemDB.setProperty("contratante", bico.getContratante().getEmail());
 			
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			datastore.put(itemDB);
