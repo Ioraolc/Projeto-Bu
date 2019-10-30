@@ -34,6 +34,10 @@ public class BicoDAO {
 		List<Entity> entidades = pq.asList(FetchOptions.Builder.withLimit(1000));
 		for (Entity entidade : entidades) {
 			Bico bico = new Bico();
+<<<<<<< HEAD
+			bico.setTipo((String)entidade.getProperty("tipoo"));
+=======
+<<<<<<< HEAD
 			bico.setTipo((String)entidade.getProperty("tipoo"));
 			bico.setDetalhes((String)entidade.getProperty("detalhes"));
 			bico.setDisponivel((Boolean)entidade.getProperty("disponivel"));
@@ -82,6 +86,61 @@ public class BicoDAO {
 			itemDB.setProperty("Locazicao", bico.getLocalizacao());
 			itemDB.setProperty("disponivel", bico.getDisponivel());
 			itemDB.setProperty("contratante", bico.getContratante().getEmail());
+=======
+			bico.setDescricao((String)entidade.getProperty("descricao"));
+>>>>>>> branch 'master' of https://github.com/Ioraolc/Projeto-Bu.git
+			bico.setDetalhes((String)entidade.getProperty("detalhes"));
+			bico.setDisponivel((Boolean)entidade.getProperty("disponivel"));
+			bico.setValor((Float)entidade.getProperty("valor"));
+			bico.setLocalizacao((String)entidade.getProperty("Localização"));
+			
+			Usuario contratante = new Usuario();
+			contratante.setEmail((String)entidade.getProperty("contratante"));
+			bico.setContratante(contratante);
+			
+			itens.add(bico);
+		}
+		
+		return itens;
+	}
+	
+	public boolean cadastrar(Bico bico) {
+		
+		if (!this.existeItemCadastrado(bico.getTipo())) {
+			Key chavePrimaria = KeyFactory.createKey("Bico", bico.getTipo()); 
+			
+			Entity entidadeItem = new Entity(chavePrimaria);
+			entidadeItem.setProperty("descricao", bico.getTipo());
+			entidadeItem.setProperty("detalhes", bico.getDetalhes());
+			entidadeItem.setProperty("disponivel", bico.getDisponivel());
+			entidadeItem.setProperty("doador", bico.getContratante().getEmail());
+			
+			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+			datastore.put(entidadeItem);
+			
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean atualizar(Bico bico) {
+		
+		Entity itemDB = this.getItem(bico.getTipo());
+		
+		if (itemDB != null) {
+			
+			itemDB.setProperty("Tipo", bico.getTipo());
+			itemDB.setProperty("detalhes", bico.getDetalhes());
+			itemDB.setProperty("valor", bico.getValor());
+			itemDB.setProperty("Locazicao", bico.getLocalizacao());
+			itemDB.setProperty("disponivel", bico.getDisponivel());
+<<<<<<< HEAD
+			itemDB.setProperty("contratante", bico.getContratante().getEmail());
+=======
+			itemDB.setProperty("doador", bico.getDoador().getEmail());
+>>>>>>> branch 'master' of http://github.com/Ioraolc/Projeto-Bu.git
+>>>>>>> branch 'master' of https://github.com/Ioraolc/Projeto-Bu.git
 			
 			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
 			datastore.put(itemDB);

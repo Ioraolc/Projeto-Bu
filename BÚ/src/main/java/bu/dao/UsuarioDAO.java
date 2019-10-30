@@ -24,6 +24,9 @@ public class UsuarioDAO {
 			entidadeUsuario.setProperty("cidade", usuario.getCidade());
 			entidadeUsuario.setProperty("estado", usuario.getEstado());
 			entidadeUsuario.setProperty("pais", usuario.getPais());
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
 			entidadeUsuario.setProperty("senha",usuario.getSenha());
 			entidadeUsuario.setProperty("telefone", usuario.getTelefone());
 			entidadeUsuario.setProperty("txperiencia", usuario.getExp_trabalho());
@@ -38,6 +41,28 @@ public class UsuarioDAO {
 			
 	}
 	private boolean ExisteUsuario(String email) {
+=======
+			entidadeUsuario.setProperty("cd_postal", usuario.getCd_postal());
+>>>>>>> branch 'master' of https://github.com/Ioraolc/Projeto-Bu.git
+			entidadeUsuario.setProperty("senha",usuario.getSenha());
+			entidadeUsuario.setProperty("telefone", usuario.getTelefone());
+			entidadeUsuario.setProperty("txperiencia", usuario.getExp_trabalho());
+			
+			DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+			datastore.put(entidadeUsuario);
+			
+			return true;
+		}
+		
+		return false;
+			
+	}
+	private boolean ExisteUsuario(String email) {
+<<<<<<< HEAD
+=======
+		// TODO Auto-generated method stub
+>>>>>>> branch 'master' of http://github.com/Ioraolc/Projeto-Bu.git
+>>>>>>> branch 'master' of https://github.com/Ioraolc/Projeto-Bu.git
 		return false;
 	}
 	public boolean existeUsuario(String email) {
